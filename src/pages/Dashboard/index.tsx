@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
 
 import income from '../../assets/income.svg';
 import outcome from '../../assets/outcome.svg';
@@ -41,11 +40,9 @@ const Dashboard: React.FC = () => {
       const formattedTransactions = response.data.transactions.map(
         (transaction: Transaction) => {
           const formattedValue = formatValue(transaction.value);
-          const formattedDate = format(
-            new Date(transaction.created_at),
-            "dd'/'MM'/'yyyy",
-          );
-
+          const formattedDate = new Date(
+            transaction.created_at,
+          ).toLocaleDateString();
           return {
             ...transaction,
             formattedValue,
